@@ -1,11 +1,12 @@
 from pydantic import BaseModel, Field
 from typing import Optional
+from decimal import Decimal
 
 class TransformadorBase(BaseModel):
     ubicacion: Optional[str] = Field(None, max_length=255)
-    kva: Optional[int] = None
-    voltage_primario: Optional[float] = None
-    voltage_secundario: Optional[str] = Field(None, max_length=20)
+    kva: Optional[Decimal] = None
+    voltage_primario: Optional[Decimal] = None
+    voltage_secundario: Optional[Decimal] = None  # Ya sin `max_length`
     marca: Optional[str] = Field(None, max_length=50)
     serie: Optional[str] = Field(None, max_length=50)
     bomba: Optional[str] = Field(None, max_length=50)

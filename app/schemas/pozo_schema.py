@@ -12,9 +12,9 @@ class PozoBase(BaseModel):
     altitud: Optional[int] = None
     profundidad: Optional[float] = None
     gasto_actual_id: Optional[int] = None
-    diametro_ademe: Optional[str] = Field(None, max_length=255)
-    longitud_ademe_ciego: Optional[str] = Field(None, max_length=255)
-    longitud_ademe_ranurado: Optional[str] = Field(None, max_length=255)
+    diametro_ademe: Optional[float] = None
+    longitud_ademe_ciego: Optional[float] = None
+    longitud_ademe_ranurado: Optional[float] = None
     tren_descarga: Optional[str] = Field(None, max_length=255)
     concesion: Optional[str] = Field(None, max_length=255)
 
@@ -26,3 +26,6 @@ class PozoUpdate(PozoBase):
 
 class PozoResponse(PozoBase):
     id: int
+
+    class Config:
+        orm_mode = True

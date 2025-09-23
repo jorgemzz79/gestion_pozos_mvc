@@ -1,3 +1,9 @@
 
 venv\Scripts\activate  
 uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+pip install sqlalchemy
+pip3 install PyMySQL
+pip3 install python-jose
+pip3 install passlib
+pip install python-multipart

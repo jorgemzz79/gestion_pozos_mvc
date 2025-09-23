@@ -1,6 +1,10 @@
 from sqlalchemy import Column, Integer, ForeignKey
 from sqlalchemy.orm import relationship
 from app.config.database import Base
+from sqlalchemy.orm import relationship
+from app.models.archivo import Archivo
+
+archivo = relationship("Archivo", backref="relaciones")
 
 class ArchivoRelacion(Base):
     __tablename__ = "archivos_relaciones"

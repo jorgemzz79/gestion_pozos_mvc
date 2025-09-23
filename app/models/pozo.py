@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Date, DECIMAL, TIMESTAMP, ForeignKey
+from sqlalchemy import Column, Integer, String, Date, DECIMAL, TIMESTAMP, text, func
 from sqlalchemy.orm import relationship
 from app.config.database import Base
 
@@ -14,16 +14,21 @@ class Pozo(Base):
     longitud = Column(DECIMAL(9, 6))
     altitud = Column(Integer)
     profundidad = Column(DECIMAL(10, 2))
-    gasto_actual_id = Column(Integer)
-    diametro_ademe = Column(String(255))
-    longitud_ademe_ciego = Column(String(255))
-    longitud_ademe_ranurado = Column(String(255))
+    gasto_actual_id = Column(Integer)  # si es FK, cámbialo a ForeignKey(...)
+    diametro_ademe = Column(DECIMAL(10, 2))
+    longitud_ademe_ciego = Column(DECIMAL(10, 2))
+    longitud_ademe_ranurado = Column(DECIMAL(10, 2))
     tren_descarga = Column(String(255))
     concesion = Column(String(255))
-    created_at = Column(TIMESTAMP, server_default="CURRENT_TIMESTAMP")
-    updated_at = Column(TIMESTAMP, server_default="CURRENT_TIMESTAMP", onupdate="CURRENT_TIMESTAMP")
-    tren_descarga = Column(String(255))
-    concesion = Column(String(255))
+
+    # ✅ Importante: expresiones SQL, no strings
+    created_at = Column(TIMESTAMP, server_default=text("CURRENT_TIMESTAMP"))
+    updated_at = Column(
+        TIMESTAMP,
+        server_default=text("CURRENT_TIMESTAMP"),
+        onupdate=func.now(),
+    )
+
     # Relaciones
     motores = relationship("Motor", back_populates="pozo", cascade="all, delete")
     recibos_luz = relationship("ReciboLuz", back_populates="pozo", cascade="all, delete")
