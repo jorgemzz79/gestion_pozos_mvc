@@ -29,4 +29,4 @@ api_router.include_router(almacenamiento_routes.router, prefix="/almacenamiento"
 api_router.include_router(archivo_routes.router, prefix="/archivos", tags=["Archivos"])
 api_router.include_router(archivo_relacion_routes.router, prefix="/archivos_relaciones", tags=["Relaciones de Archivos"])
 api_router.include_router(unidades.router, prefix="/unidades", tags=["Unidades"])
-api_router.include_router(auth_controller.router, prefix="/auth", tags=["Autenticación"])  # ✅ Agregado correctamente
+api_router.include_router(auth_controller.router, tags=["Autenticación"])

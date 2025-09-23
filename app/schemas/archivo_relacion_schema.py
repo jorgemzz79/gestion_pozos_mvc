@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from typing import Optional
+from datetime import datetime
 
 class ArchivoRelacionBase(BaseModel):
     archivo_id: int
@@ -16,5 +17,19 @@ class ArchivoRelacionUpdate(ArchivoRelacionBase):
 
 class ArchivoRelacionResponse(ArchivoRelacionBase):
     id: int
+    class Config:
+        orm_mode = True
+
+# 👇 NUEVO: lo que devuelve el GET con datos del archivo + id de la relación
+class ArchivoConRelacionResponse(BaseModel):
+    relacion_id: int
+    id: int                       # id del archivo
+    nombre_archivo: str
+    tipo_archivo: str
+    ruta_archivo: str
+    categoria: Optional[str] = None
+    descripcion: Optional[str] = None
+    fecha_subida: datetime
+
     class Config:
         orm_mode = True
