@@ -8,6 +8,7 @@ class ModificacionReparacionBase(BaseModel):
     descripcion_modificacion_reparacion: Optional[str] = Field(None, max_length=500)
     fecha: Optional[datetime] = None
     responsable: Optional[str] = Field(None, max_length=255)
+    responsable_id: Optional[int] = None
 
 class ModificacionReparacionCreate(ModificacionReparacionBase):
     pozo_id: int

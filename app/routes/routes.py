@@ -5,6 +5,8 @@ from app.routes import (
     recibo_luz_routes,
     mediciones,
     modificacion_reparacion_routes,
+    empleado_routes,
+    catalogo_mod_rep_routes,
     nivel_routes,
     transformador_routes,
     almacenamiento_routes,
@@ -23,6 +25,8 @@ api_router.include_router(motor_routes.router, prefix="/motores", tags=["Motores
 api_router.include_router(recibo_luz_routes.router, prefix="/recibos_luz", tags=["Recibos de Luz"])
 api_router.include_router(mediciones.router, prefix="/mediciones", tags=["Mediciones"])
 api_router.include_router(modificacion_reparacion_routes.router, prefix="/modificaciones_reparaciones", tags=["Modificaciones y Reparaciones"])
+api_router.include_router(empleado_routes.router, prefix="/empleados", tags=["Empleados"])
+api_router.include_router(catalogo_mod_rep_routes.router, prefix="/catalogo_mod_rep", tags=["Catálogo Modificaciones/Reparaciones"])
 api_router.include_router(nivel_routes.router, prefix="/niveles", tags=["Niveles"])
 api_router.include_router(transformador_routes.router, prefix="/transformadores", tags=["Transformadores"])
 api_router.include_router(almacenamiento_routes.router, prefix="/almacenamiento", tags=["Almacenamiento"])

@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Boolean, Column, Integer, String
 from app.config.database import Base
 
 class CatalogoModRep(Base):
@@ -8,3 +8,4 @@ class CatalogoModRep(Base):
     nombre = Column(String(255), nullable=False)
     tipo = Column(String(255))
     descripcion = Column(String(255))
+    activo = Column(Boolean, nullable=False, default=True)
