@@ -1,5 +1,5 @@
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Optional
 from datetime import datetime
 
@@ -18,5 +18,4 @@ class ModificacionReparacionUpdate(ModificacionReparacionBase):
 class ModificacionReparacionResponse(ModificacionReparacionBase):
     id: int
     pozo_id: int
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)

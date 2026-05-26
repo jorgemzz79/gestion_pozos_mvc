@@ -20,7 +20,7 @@ def create_modificacion_reparacion(
     db: Session = Depends(get_db),
     usuario: Usuario = Depends(get_current_user)  # ✅ agregado
 ):
-    new_modificacion = ModificacionReparacion(**modificacion.dict())
+    new_modificacion = ModificacionReparacion(**modificacion.model_dump())
     db.add(new_modificacion)
     db.commit()
     db.refresh(new_modificacion)
@@ -32,6 +32,19 @@ def get_modificaciones_reparaciones(
     usuario: Usuario = Depends(get_current_user)  # ✅ agregado
 ):
     return db.query(ModificacionReparacion).all()
+
+@router.get("/pozo/{pozo_id}", response_model=List[ModificacionReparacionResponse])
+def get_modificaciones_reparaciones_por_pozo(
+    pozo_id: int,
+    db: Session = Depends(get_db),
+    usuario: Usuario = Depends(get_current_user)  # ✅ agregado
+):
+    return (
+        db.query(ModificacionReparacion)
+        .filter(ModificacionReparacion.pozo_id == pozo_id)
+        .order_by(ModificacionReparacion.fecha.desc())
+        .all()
+    )
 
 @router.get("/{modificacion_id}", response_model=ModificacionReparacionResponse)
 def get_modificacion_reparacion(
@@ -55,7 +68,7 @@ def update_modificacion_reparacion(
     if not modificacion:
         raise HTTPException(status_code=404, detail="Modificación o reparación no encontrada")
     
-    for key, value in modificacion_data.dict(exclude_unset=True).items():
+    for key, value in modificacion_data.model_dump(exclude_unset=True).items():
         setattr(modificacion, key, value)
     
     db.commit()
